@@ -8,31 +8,10 @@ import java.util.Comparator;
 
 public class AccountRepoImpl implements AccountRepo {
 
-    private ArrayList<Account> accounts = new ArrayList<>();
+    private final ArrayList<Account> accounts;
 
-    public static void main(String[] args) {
-        AccountRepoImpl accRepo = new AccountRepoImpl();
-        accRepo.readAccountsFromFile();
-        System.out.println(accRepo.get5Poorest());
-    }
-
-    @Override
-    public void readAccountsFromFile() {
-        String filePath = new File("").getAbsolutePath();
-        System.out.println();
-        Path p = Paths.get(filePath + "/data.txt");
-        try {
-            Files.lines(p).forEach((String line) -> {
-                String[] cells = line.split(",");
-                String name = cells[0];
-                int balance = Integer.parseInt(cells[1]);
-                String bank = cells[2];
-                Account account = new Account(name, balance, bank);
-                accounts.add(account);
-            });
-        } catch (IOException e) {
-            System.out.println(e.toString());
-        }
+    public AccountRepoImpl(ArrayList<Account> accounts){
+        this.accounts = accounts;
     }
 
     @Override
@@ -146,7 +125,6 @@ public class AccountRepoImpl implements AccountRepo {
     public Account hackBank() {
         Account steinBagger = new Account("Stein Bagger");
 
-
         for(Account account: accounts){
             int amount = account.balance;
             account.withdraw(amount);
@@ -156,5 +134,21 @@ public class AccountRepoImpl implements AccountRepo {
         accounts.add(steinBagger);
 
         return steinBagger;
+    }
+
+    @Override
+    public Account terminateAccount(String name) {
+        Account removedAcc = null;
+        for(Account acc: accounts){
+            if(acc.owner.equals(name)){
+                removedAcc = acc;
+
+            }
+        }
+
+        if(removedAcc != null){
+            accounts.remove(removedAcc);
+        }
+        return removedAcc;
     }
 }

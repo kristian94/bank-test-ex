@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public interface AccountRepo {
-    void readAccountsFromFile();
     ArrayList<Account> getAllAccounts();
     double getAverageBalance();
     ArrayList<Account> get5Richest();
@@ -11,4 +10,5 @@ public interface AccountRepo {
     Account getPoorestAccount();
     void robinHood();
     Account hackBank();
+    Account terminateAccount(String name);
 }
