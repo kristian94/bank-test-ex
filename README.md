@@ -6,3 +6,6 @@ Opgaven er lavet af:
 - Kristoffer Noga
 
 ## Screnshots fra tests
+
+
+## Notes
